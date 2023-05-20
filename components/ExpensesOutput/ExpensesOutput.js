@@ -34,7 +34,8 @@ const Dummy_Expenses = [
     description: "a Book",
     amount: 3.55,
     date: new Date("2021-3-15"),
-  }, {
+  },
+  {
     id: "e6",
     description: "a pair of shoes",
     amount: 29.35,
@@ -68,6 +69,8 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: GlobalStyles.colors.primary700,
     flex: 1,
-    paddingHorizontal:24 , paddingTop : 24 , paddingBottom : 0
+    paddingHorizontal: 24,
+    paddingTop: 24,
+    paddingBottom: 0,
   },
 });

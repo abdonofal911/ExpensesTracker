@@ -26,13 +26,12 @@ const ExpensesOverview = () => {
             size={24}
             color={tintColor}
             onPress={() => {
-              navigation.navigate('ManageExpense');
+              navigation.navigate("ManageExpense");
             }}
           />
         ),
       })}
     >
-    
       <BottomTabs.Screen
         name="RecentExpenses"
         component={RecentExpenses}
