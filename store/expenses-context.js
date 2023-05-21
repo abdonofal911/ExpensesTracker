@@ -1,6 +1,6 @@
 import { createContext, useReducer } from "react";
 
-const DUMMY_EXPENSES  = [
+const DUMMY_EXPENSES = [
   {
     id: "e1",
     description: "a pair of shoes",
@@ -41,16 +41,16 @@ const DUMMY_EXPENSES  = [
     id: "e7",
     description: "a Book",
     amount: 4.25,
-    date: new Date("2021-6-19"),
+    date: new Date("2023-5-19"),
   },
   {
     id: "e8",
     description: "a T-Shirt",
     amount: 14.95,
-    date: new Date("2021-2-18"),
+    date: new Date("2023-5-18"),
   },
   {
-    id: "e8",
+    id: "e9",
     description: "a T-Shirt",
     amount: 14.95,
     date: new Date("2023-5-20"),
@@ -84,24 +84,29 @@ function expensesReducer(state, action) {
       return state;
   }
 }
+
 function ExpensesContextProvider({ children }) {
   const [expensesState, dispatch] = useReducer(expensesReducer, DUMMY_EXPENSES);
 
   function addExpense({ expenseData }) {
     dispatch({ type: "ADD", payload: expenseData });
   }
+
   function deleteExpense({ id }) {
     dispatch({ type: "DELETE", payload: id });
   }
+
   function updateExpense({ expenseData, id }) {
-    dispatch({ type: "ADD", payload: { id: id, data: expenseData } });
+    dispatch({ type: "UPDATE", payload: { id: id, data: expenseData } });
   }
+
   const value = {
     expenses: expensesState,
     addExpense: addExpense,
     deleteExpense: deleteExpense,
     updateExpense: updateExpense,
   };
+
   return (
     <ExpensesContext.Provider value={value}>
       {children}

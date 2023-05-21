@@ -26,6 +26,21 @@ function ManageExpense({ route, navigation }) {
   };
 
   const ConfirmHanlder = () => {
+    if (isEditing) {
+      expensesCtx.updateExpense(
+        editedExpenseId , {
+        description: "test!!!",
+        amount: 9.99,
+        date: new Date("2023-05-20"),
+      
+      });
+    } else {
+      expensesCtx.addExpense({
+        description: "test",
+        amount: 9.99,
+        date: new Date("2023-05-19"),
+      });
+    }
     navigation.goBack();
   };
 
