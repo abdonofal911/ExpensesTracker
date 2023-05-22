@@ -18,6 +18,7 @@ const ExpenseForm = () => {
         Label="Date"
         TextInputConfig={{
           placeholder: "YYYY-MM-DD",
+          keyboardType: "decimal-pad",
           maxLength: 10,
           onChangeText: () => {},
         }}
