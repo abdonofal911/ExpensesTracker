@@ -1,5 +1,5 @@
 import { useContext, useLayoutEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import IconButton from "../components/UI/iconButton";
 import { GlobalStyles } from "../constants/styles";
 import Button from "../components/UI/Button.js";
@@ -28,21 +28,22 @@ function ManageExpense({ route, navigation }) {
   const ConfirmHanlder = () => {
     if (isEditing) {
       expensesCtx.updateExpense(
-        editedExpenseId , {
-        description: "test!!!",
-        amount: 9.99,
-        date: new Date("2023-05-20"),
-      
-      });
+        editedExpenseId,
+        {
+          description: 'Test!!!!',
+          amount: 29.99,
+          date: new Date('2022-05-20'),
+        }
+      );
     } else {
       expensesCtx.addExpense({
-        description: "test",
-        amount: 9.99,
-        date: new Date("2023-05-19"),
+        description: 'Test',
+        amount: 19.99,
+        date: new Date('2022-05-19'),
       });
     }
     navigation.goBack();
-  };
+  }
 
   return (
     <View style={styles.Constainer}>
