@@ -4,21 +4,29 @@ import { useState } from "react";
 import { GlobalStyles } from "../../constants/styles";
 import Button from "../UI/Button";
 
-const ExpenseForm = ({ onCancel, onSubmit ,submitButtonLabel }) => {
+const ExpenseForm = ({ onCancel, onSubmit, submitButtonLabel }) => {
   const [inputValues, setInputValues] = useState({
     amount: "",
     date: "",
     description: "",
   });
   const inputChangeHandler = (inputIdentifier, enteredVlaue) => {
-    setAmountValue((currentInputValues) => {
+    setInputValues((currentInputValues) => {
       return {
         ...currentInputValues,
         [inputIdentifier]: enteredVlaue,
       };
     });
   };
-  function submitHandler() {}
+  function submitHandler(enteredValue) {
+    const expenseData = {
+      amount: +inputValues.amount,
+      date: new Date(inputValues.date),
+      description: inputValues.description,
+    };
+
+    onSubmit(expenseData);
+  }
   return (
     <View style={styles.form}>
       <Text style={styles.title}>Your Expense</Text>
