@@ -48,15 +48,8 @@ function ManageExpense({ route, navigation }) {
 
   return (
     <View style={styles.Constainer}>
-    <ExpenseForm />
-      <View style={styles.buttons}>
-        <Button mode="flat" onPress={CancelHanlder} style={styles.button}>
-          Cancel
-        </Button>
-        <Button style={styles.button} onPress={ConfirmHanlder}>
-          {isEditing ? "Update" : "Add"}
-        </Button>
-      </View>
+    <ExpenseForm onCancel={CancelHanlder} submitButtonLabel={isEditing ? "Update" : "Add"} />
+      
       {isEditing && (
         <View style={styles.deleteContainer}>
           <IconButton
