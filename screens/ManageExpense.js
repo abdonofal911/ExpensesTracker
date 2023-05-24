@@ -43,7 +43,7 @@ function ManageExpense({ route, navigation }) {
   return (
     <View style={styles.Constainer}>
       <ExpenseForm
-      submitButtonLabel={isEditing ? "Update" : "Add"}
+        submitButtonLabel={isEditing ? "Update" : "Add"}
         onSubmit={ConfirmHanlder}
         onCancel={CancelHanlder}
         defaultValues={selectedExpense}
