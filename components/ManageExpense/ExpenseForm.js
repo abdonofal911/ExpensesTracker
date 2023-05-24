@@ -13,15 +13,15 @@ const ExpenseForm = ({
 }) => {
   const [inputs, setInputs] = useState({
     amount: {
-        value: defaultValues ? defaultValues.amount.toString() : '',
-        isValid: true,
+      value: defaultValues ? defaultValues.amount.toString() : "",
+      isValid: true,
     },
     date: {
-        value: defaultValues ? getFormattedDate(defaultValues.date) : '',
-        isValid: true,
+      value: defaultValues ? getFormattedDate(defaultValues.date) : "",
+      isValid: true,
     },
     description: {
-      value: defaultValues ? defaultValues.description : '',
+      value: defaultValues ? defaultValues.description : "",
       isValid: true,
     },
   });
@@ -36,24 +36,24 @@ const ExpenseForm = ({
 
   function submitHandler() {
     const expenseData = {
-        amount: +inputs.amount.value,
-        date: new Date(inputs.date.value),
-        description: inputs.description.value,
+      amount: +inputs.amount.value,
+      date: new Date(inputs.date.value),
+      description: inputs.description.value,
     };
 
     const amountIsValid = !isNaN(expenseData.amount) && expenseData.amount > 0;
-    const dateIsValid = expenseData.date.toString() !== 'Invalid Date';
+    const dateIsValid = expenseData.date.toString() !== "Invalid Date";
     const descriptionIsValid = expenseData.description.trim().length > 0;
 
     if (!amountIsValid || !dateIsValid || !descriptionIsValid) {
-   //   Alert.alert("invalid Input", "Please cheak your input values");
+      //   Alert.alert("invalid Input", "Please cheak your input values");
       setInputs((curInputs) => {
         return {
-            amount: { value: curInputs.amount.value, isValid: amountIsValid },
-            date: { value: curInputs.date.value, isValid: dateIsValid },
-            description: {
-              value: curInputs.description.value,
-              isValid: descriptionIsValid,
+          amount: { value: curInputs.amount.value, isValid: amountIsValid },
+          date: { value: curInputs.date.value, isValid: dateIsValid },
+          description: {
+            value: curInputs.description.value,
+            isValid: descriptionIsValid,
           },
         };
       });
@@ -64,9 +64,9 @@ const ExpenseForm = ({
   }
 
   const formIsInvalid =
-  !inputs.amount.isValid ||
-  !inputs.date.isValid ||
-  !inputs.description.isValid;
+    !inputs.amount.isValid ||
+    !inputs.date.isValid ||
+    !inputs.description.isValid;
 
   return (
     <View style={styles.form}>
@@ -74,6 +74,7 @@ const ExpenseForm = ({
       <View style={styles.inputRow}>
         <Input
           style={styles.rowInput}
+          inValid={!inputs.amount.isValid}
           Label="Amount"
           TextInputConfig={{
             keyboardType: "decimal-pad",
@@ -83,6 +84,7 @@ const ExpenseForm = ({
         />
         <Input
           Label="Date"
+          inValid={!inputs.date.isValid}
           style={styles.rowInput}
           TextInputConfig={{
             placeholder: "YYYY-MM-DD",
@@ -96,6 +98,7 @@ const ExpenseForm = ({
 
       <Input
         Label="Description"
+        inValid={!inputs.description.isValid}
         TextInputConfig={{
           multiline: true,
           onChangeText: inputChangeHandler.bind(this, "description"),
@@ -103,7 +106,9 @@ const ExpenseForm = ({
         }}
       />
       {formIsInvalid && (
-        <Text>Invalid input values - please check your entered data!</Text>
+        <Text style={styles.errorText}>
+          Invalid input values - please check your entered data!
+        </Text>
       )}
       <View style={styles.buttons}>
         <Button mode="flat" onPress={onCancel} style={styles.button}>
@@ -157,5 +162,10 @@ const styles = StyleSheet.create({
   button: {
     minWidth: 120,
     marginHorizontal: 8,
+  },
+  errorText: {
+    textAlign: "center",
+    color: GlobalStyles.colors.error500,
+    margin: 8,
   },
 });
