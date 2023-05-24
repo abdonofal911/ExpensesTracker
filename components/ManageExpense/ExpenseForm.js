@@ -13,23 +13,23 @@ const ExpenseForm = ({
 }) => {
   const [inputs, setInputs] = useState({
     amount: {
-      value: defaultValues ? defaultValues.amount.toString() : "",
-      isValid: true,
+        value: defaultValues ? defaultValues.amount.toString() : '',
+        isValid: true,
     },
     date: {
-      value: defaultValues ? getFormattedDate(defaultValues.date) : "",
-      isValid: true,
+        value: defaultValues ? getFormattedDate(defaultValues.date) : '',
+        isValid: true,
     },
     description: {
-      value: defaultValues ? defaultValues.description : "",
+      value: defaultValues ? defaultValues.description : '',
       isValid: true,
     },
   });
-  const inputChangeHandler = (inputIdentifier, enteredVlaue) => {
+  const inputChangeHandler = (inputIdentifier, enteredValue) => {
     setInputs((curInputs) => {
       return {
         ...curInputs,
-        [inputIdentifier]: { value: enteredVlaue, isValid: true },
+        [inputIdentifier]: { value: enteredValue, isValid: true },
       };
     });
   };
@@ -42,7 +42,7 @@ const ExpenseForm = ({
     };
 
     const amountIsValid = !isNaN(expenseData.amount) && expenseData.amount > 0;
-    const dateIsValid = expenseData.date.toString() === "Invalid Date";
+    const dateIsValid = expenseData.date.toString() !== 'Invalid Date';
     const descriptionIsValid = expenseData.description.trim().length > 0;
 
     if (!amountIsValid || !dateIsValid || !descriptionIsValid) {
