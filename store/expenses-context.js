@@ -1,66 +1,10 @@
 import { createContext, useReducer } from "react";
 
-const DUMMY_EXPENSES = [
-  {
-    id: "e1",
-    description: "a pair of shoes",
-    amount: 29.35,
-    date: new Date("2021-12-19"),
-  },
-  {
-    id: "e2",
-    description: "a Book",
-    amount: 4.25,
-    date: new Date("2021-6-19"),
-  },
-  {
-    id: "e3",
-    description: "a T-Shirt",
-    amount: 14.95,
-    date: new Date("2021-2-18"),
-  },
-  {
-    id: "e4",
-    description: "a Coffe",
-    amount: 0.55,
-    date: new Date("2021-1-17"),
-  },
-  {
-    id: "e5",
-    description: "a Book",
-    amount: 3.55,
-    date: new Date("2023-5-17"),
-  },
-  {
-    id: "e6",
-    description: "a pair of shoes",
-    amount: 29.35,
-    date: new Date("2021-12-19"),
-  },
-  {
-    id: "e7",
-    description: "a Book",
-    amount: 4.25,
-    date: new Date("2023-5-19"),
-  },
-  {
-    id: "e8",
-    description: "a T-Shirt",
-    amount: 14.95,
-    date: new Date("2023-5-18"),
-  },
-  {
-    id: "e9",
-    description: "a T-Shirt",
-    amount: 14.95,
-    date: new Date("2023-5-20"),
-  },
-];
-
 export const ExpensesContext = createContext({
   expenses: [],
   addExpense: ({ description, amount, date }) => {},
-  deleteExpense: (id ) => {},
+  setExpenses: (espenses) => {},
+  deleteExpense: (id) => {},
   updateExpense: (id, { description, amount, date }) => {},
 });
 
@@ -80,28 +24,35 @@ function expensesReducer(state, action) {
       return updatedExpenses;
     case "DELETE":
       return state.filter((expense) => expense.id !== action.payload);
+    case "SET":
+      return action.payload;
     default:
       return state;
   }
 }
 
 function ExpensesContextProvider({ children }) {
-  const [expensesState, dispatch] = useReducer(expensesReducer, DUMMY_EXPENSES);
+  const [expensesState, dispatch] = useReducer(expensesReducer, []);
 
   function addExpense(expenseData) {
     dispatch({ type: "ADD", payload: expenseData });
+  }
+
+  function setExpenses(expenses) {
+    dispatch({type: 'SET' , payload : expenses})
   }
 
   function deleteExpense(id) {
     dispatch({ type: "DELETE", payload: id });
   }
 
-  function updateExpense(id,expenseData) {
+  function updateExpense(id, expenseData) {
     dispatch({ type: "UPDATE", payload: { id: id, data: expenseData } });
   }
 
   const value = {
     expenses: expensesState,
+    setExpenses : setExpenses , 
     addExpense: addExpense,
     deleteExpense: deleteExpense,
     updateExpense: updateExpense,

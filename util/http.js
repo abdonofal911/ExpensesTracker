@@ -11,11 +11,11 @@ export async function fetchExpenses() {
   const response = await axios.get(BACKEND_URL + "/expenses.json");
 
   const expenses = [];
-//  console.log(response.data);
+  console.log(response.data);
   for (const key in response.data) {
     const expensesObj = {
       id: key,
-      amount: response.data[key.amount],
+      amount: response.data[key].amount,
       date: new Date(response.data[key].date),
       description: response.data[key].description,
     };
