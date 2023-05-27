@@ -10,6 +10,9 @@ import LoadingOverlay from "../components/UI/LoadingOverlay";
 function ManageExpense({ route, navigation }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const [error, setError] = useState();
+
+
   const expensesCtx = useContext(ExpensesContext);
 
   const editedExpenseId = route.params?.expenseId;
